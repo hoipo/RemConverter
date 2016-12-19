@@ -1,6 +1,0 @@
-[
-
-    { "caption": "CSS: toggle px to rem values", "command": "rem_converter", "args":{"toRem":true} },
-    { "caption": "CSS: toggle rem to px values", "command": "rem_converter", "args":{"toRem":false} }
-
-]

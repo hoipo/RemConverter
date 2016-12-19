@@ -21,17 +21,17 @@ class RemConverterCommand(sublime_plugin.TextCommand):
         httpParser.feed(textOfView)
         items = httpParser.getItems()
         for str in items:
-            _transformResult = self.transform(self.remUnit,str,toRem)
+            _transformResult = self.transform(str,toRem)
             region = self.view.find(self.patternToString(str),0)
             self.view.replace(edit, region, _transformResult)
 
-    def transform(self,remUnit=20,str='',toRem=True):
+    def transform(self,str='',toRem=True):
         def repl(m):
             gd = m.groupdict()
             if toRem:
                 # px -> rem
                 if gd.get('unit', None) == 'px':
-                    ret = '%3.4f' % (float(gd.get('qty')) / float(remUnit))
+                    ret = '%3.4f' % (float(gd.get('qty')) / float(self.remUnit))
                     while ret[-1] == '0':
                         ret = ret[:-1]
                     if ret.endswith('.'):
@@ -42,7 +42,7 @@ class RemConverterCommand(sublime_plugin.TextCommand):
             else:
                 # rem -> px
                 if gd.get('unit', None) == 'rem':
-                    ret_val = float(gd.get('qty')) * float(remUnit)
+                    ret_val = float(gd.get('qty')) * float(self.remUnit)
                     ret = '%3.1f' % ret_val
                     if ret.endswith('.0'):
                         ret = ('%3.0f' % ret_val) + 'px'
