@@ -1,0 +1,4 @@
+[
+    { "keys": ["alt+z"], "command": "rem_converter", "args":{"toRem":true}  },
+    { "keys": ["alt+x"], "command": "rem_converter", "args":{"toRem":false}  }
+]
