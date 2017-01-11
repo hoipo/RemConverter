@@ -2,7 +2,9 @@ RemConverter
 -------------
 
 一个CSS的px值和rem值相互转换的Sublime Text插件。
+
 只支持Sublime Text 3，支持HTML,CSS,LESS,SCSS和SASS。
+
 这个插件可以在HTML代码中解析出style标签中的CSS，然后把px值转成rem值，或者是rem转px。(*^__^*) 
 
 ## 安装
