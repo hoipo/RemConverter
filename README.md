@@ -2,8 +2,8 @@ RemConverter
 -------------
 
 A tools for converting px to rem OR rem to px automatically.
-this is the version 1.0, it just work for Sublime Text 3 width HTML file, not support CSS, LESS or SCSS, but the next version will support these file soon.
-This plugin can parse you css in the style tag which in your HTML code and converter the unit to px or rem.
+this is the version 1.0, it not only work for Sublime Text 3 width HTML file,but also the CSS, LESS, SCSS or SASS files.
+This plugin can parse you css in the style tag which in your HTML code and converter the unit to px or rem.Just enjoy it. (*^__^*)
 
 ### [中文文档](https://github.com/hoipo/RemConverter/blob/master/README_zh.md)
 

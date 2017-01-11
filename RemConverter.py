@@ -4,6 +4,7 @@
 import sublime
 import sublime_plugin
 import re
+import os
 from html.parser import HTMLParser
 
 class RemConverterCommand(sublime_plugin.TextCommand):
@@ -12,17 +13,20 @@ class RemConverterCommand(sublime_plugin.TextCommand):
         self.remUnit = sublime.load_settings('RemConverter.sublime-settings').get('remUnit', 20)
 
     def run(self, edit,**kw):
+        fileExtension = os.path.splitext(self.view.file_name())[1][1:].lower()
         toRem = kw.get('toRem',True)
         region = sublime.Region(0,self.view.size())
         textOfView = self.view.substr(region)
-        parser = MyHTMLParser()
-        parser.feed(textOfView)
-        httpParser = MyHTMLParser()
-        httpParser.feed(textOfView)
-        items = httpParser.getItems()
-        for str in items:
-            _transformResult = self.transform(str,toRem)
-            region = self.view.find(self.patternToString(str),0)
+        if re.match(r'^html?$', fileExtension):
+            httpParser = MyHTMLParser()
+            httpParser.feed(textOfView)
+            items = httpParser.getItems()
+            for str in items:
+                _transformResult = self.transform(str,toRem)
+                region = self.view.find(self.patternToString(str),0)
+                self.view.replace(edit, region, _transformResult)
+        elif re.match(r'^(css|less|s[ca]ss)$', fileExtension):
+            _transformResult = self.transform(textOfView,toRem)
             self.view.replace(edit, region, _transformResult)
 
     def transform(self,str='',toRem=True):
